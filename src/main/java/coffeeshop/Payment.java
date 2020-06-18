@@ -12,16 +12,21 @@ public class Payment {
     private Long paymentId;
     private Long orderId;
     private Long coffeeId;
+    private String coffeeName;
     private Float price;
     private Integer qty;
     private Float totalAmount;
-    private String status;
-    private String coffeeName;
+    private String orderStatus;
+    private String paymentStatus;
 
     @PostPersist
     public void onPostPersist(){
         Paid paid = new Paid();
         BeanUtils.copyProperties(this, paid);
+        paid.setOrderId(this.getOrderId());
+        paid.setTotalAmount(this.getTotalAmount());
+        paid.setOrderStatus(this.getOrderStatus());
+        paid.setPaymentStatus(this.getPaymentStatus());
         paid.publishAfterCommit();
 
         //서킷브레이커를 위한 설정
@@ -88,11 +93,18 @@ public class Payment {
         this.totalAmount = totalAmount;
     }
 
-    public String getStatus() {
-        return status;
+    public String getOrderStatus() {
+        return orderStatus;
     }
-    public void setStatus(String status) {
-        this.status = status;
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 
     public String getCoffeeName() {

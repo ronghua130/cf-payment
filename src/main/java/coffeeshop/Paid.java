@@ -8,7 +8,8 @@ public class Paid extends AbstractEvent {
     private Float price;
     private Integer qty;
     private Float totalAmount;
-    private String status;
+    private String orderStatus;
+    private String paymentStatus;
     private String coffeeName;
 
     public Paid(){
@@ -53,13 +54,21 @@ public class Paid extends AbstractEvent {
     public void setTotalAmount(Float totalAmount) {
         this.totalAmount = totalAmount;
     }
-    public String getStatus() {
-        return status;
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getPaymentStatus() {
+        return paymentStatus;
     }
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
     public String getCoffeeName() {
         return coffeeName;
     }
